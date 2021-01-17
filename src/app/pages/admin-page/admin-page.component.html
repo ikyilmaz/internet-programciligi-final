@@ -1,0 +1,58 @@
+<app-user-layout>
+  <div class="row justify-content-center">
+    <div class="col-md-10 mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="row justify-content-center">
+            <div class="col-md-2">
+              <button (click)="openModal()" class="btn btn-primary">Kategori Oluştur</button>
+            </div>
+          </div>
+          <hr>
+          <h4 class="text-light text-center">Kategoriler</h4>
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let category of categories | async">
+              <div class="row">
+                <div class="col-md-11">
+                  {{category.name}}
+                </div>
+                <div class="col-md-1">
+                  <a role="button" (click)="updateCategory(category)">
+                    <fa-icon size="1x" [icon]="faEdit"></fa-icon>
+                  </a>
+
+                  <a class="text-dark ml-2" role="button" (click)="deleteCategory(category.id)">
+                    <fa-icon size="1x" [icon]="faTrash"></fa-icon>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <hr>
+          <h4 class="text-light text-center">Sorular</h4>
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let question of questions | async">
+              <div class="row">
+                <div class="col-md-11">
+                  {{question.content}}
+                </div>
+                <div class="col-md-1">
+                  <a role="button" (click)="updateQuestion(question)">
+                    <fa-icon size="1x" [icon]="faEdit"></fa-icon>
+                  </a>
+
+                  <a class="text-dark ml-2" role="button" (click)="deleteQuestion(question.id)">
+                    <fa-icon size="1x" [icon]="faTrash"></fa-icon>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-user-layout>

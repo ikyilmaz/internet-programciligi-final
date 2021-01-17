@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title">Soru Güncelle</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="content">Soru</label>
+      <input [(ngModel)]="question.content" id="content" class="form-control" name="dp">
+    </div>
+    <div class="form-group">
+      <label for="category">Kategori</label>
+      <select [(ngModel)]="question.categoryId" id="category" class="form-control" name="dpa">
+        <option [ngValue]="category.id" *ngFor="let category of categories | async">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+  </form>
+</div>
+<div [ngClass]="result.process ? 'alert alert-success':'alert alert-danger'"
+     *ngIf="result.message.length>0">{{result.message}}</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="updateQuestion()">Güncelle</button>
+</div>
+

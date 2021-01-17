@@ -1,0 +1,104 @@
+<app-user-layout>
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <!--      profil-->
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+          <div class="card bg-dark text-light">
+            <div class="card-header">
+              Profil Güncelle
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="updateProfile()" class="text-light">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="firstName">İsim</label>
+                      <input
+                        [(ngModel)]="profile.firstName"
+                        name="firstName"
+                        id="firstName"
+                        type="text"
+                        class="form-control"
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label for="lastName">Soyisim</label>
+                      <input
+                        [(ngModel)]="profile.lastName"
+                        name="lastName"
+                        id="lastName"
+                        type="text"
+                        class="form-control"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Profilimi Güncelle</button>
+              </form>
+              <div
+                [ngClass]="profileResult.process ? 'alert alert-success':'alert alert-danger'"
+                *ngIf="profileResult.message.length>0"
+              >
+                {{profileResult.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="bg-light">
+      <!--      şifre-->
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card bg-dark text-light">
+            <div class="card-header">
+              Şifreni Değiştir
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="changePassword()" class="text-light">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="currentPassword">Şu anki şifre</label>
+                      <input
+                        [(ngModel)]="password.currentPassword"
+                        name="currentPassword"
+                        id="currentPassword"
+                        type="text"
+                        class="form-control"
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+                      <label for="newPassword">Yeni şifre</label>
+                      <input
+                        [(ngModel)]="password.newPassword"
+                        name="newPassword"
+                        id="newPassword"
+                        type="text"
+                        class="form-control"
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Şifremi Değiştir</button>
+              </form>
+              <div
+                [ngClass]="passwordResult.process ? 'alert alert-success':'alert alert-danger'"
+                *ngIf="passwordResult.message.length>0"
+              >
+                {{passwordResult.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-user-layout>

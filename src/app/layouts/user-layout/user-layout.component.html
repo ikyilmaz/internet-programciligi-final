@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">Soru Cevap Uygulaması</a>
+    <!--    Responsive Nav Bar butonu-->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar"
+      aria-controls="navbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav">
+        <li class="nav nav-item">
+          <a class="nav-link" [routerLink]="['/']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+            Anasayfa
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/my-questions']"
+            routerLinkActive="active"
+          >
+            Sorularım
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/my-profile']"
+            routerLinkActive="active"
+          >
+            Profilim
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex">
+      <div class="mr-2">
+        <!-- Soru Oluştur -->
+        <button
+          *ngIf="authService.isAuth"
+          (click)="openModal()"
+          role="button"
+          class="btn btn-outline-success"
+          type="button"
+        >
+          Soru Yayınla
+        </button>
+      </div>
+      <div>
+        <!-- Giriş yapmamışsa -->
+        <a
+          *ngIf="!authService.isAuth"
+          [routerLink]="['/login']"
+          role="button"
+          class="btn btn-outline-success"
+          type="submit"
+        >Giriş Yap</a
+        >
+        <!-- Giriş Yapmışsa -->
+        <button
+          *ngIf="authService.isAuth"
+          class="btn btn-outline-danger"
+          (click)="logout()"
+          type="button"
+        >
+          Çıkış Yap
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <ng-content></ng-content>
+</div>

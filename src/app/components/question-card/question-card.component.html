@@ -1,0 +1,81 @@
+<div class="card bg-dark text-light border-light">
+  <div class="card-header text-center">
+    <a class="card-link pointer-event">{{question.userProfile?.firstName}} {{question.userProfile?.lastName}}
+      soruyor</a>
+    <button *ngIf="question.ownerId === authService.currentUser?.user.uid" class="btn btn-info ml-5"
+            (click)="openUpdateQuestionModal(question)">
+      Güncelle
+    </button>
+    <button
+      type="button"
+      class="btn close"
+      aria-label="Close"
+      (click)="deleteQuestion(question.id)"
+      *ngIf="question.ownerId === authService.currentUser?.user.uid"
+    >
+      <span class="text-light" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="card-body">
+    <div class="text-center">
+       <p>
+         <span class="text-info">Kategori: </span> {{question.category?.name}}
+       </p>
+    </div>
+    <p class="text-center">
+      {{question.content.endsWith("?") ? question.content : question.content + "?"}}
+    </p>
+
+    <hr class="bg-light">
+
+    <ul class="list-group" *ngIf="question?.answers?.length !== 0">
+      <li class="list-group-item list-group-item-action bg-dark text-light" *ngFor="let answer of question?.answers;">
+        <div class="row">
+          <div class="col-md-10">
+                    <span>
+                      <span class="text-info">{{answer.userProfile?.firstName}} {{answer.userProfile?.lastName}}:</span>
+                      {{answer.content}}
+                    </span>
+          </div>
+
+          <div class="col-md-2">
+
+            <a role="button" (click)="openUpdateAnswerModal(answer)">
+              <fa-icon size="1x" [icon]="faEdit"></fa-icon>
+            </a>
+            <button
+              type="button"
+              class="btn close"
+              aria-label="Close"
+              (click)="deleteAnswer(answer.id)"
+              *ngIf="question.ownerId === authService.currentUser?.user.uid || answer.ownerId === authService.currentUser?.user.uid"
+            >
+              <span class="text-light" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+    <div class="text-center" *ngIf="question?.answers?.length === 0">
+      <h3>Cevap Yazılmamış</h3>
+      <p>İlk yazan sen ol</p>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <form>
+      <div class="input-group">
+        <input [(ngModel)]="answer.content" name="answer" class="form-control bg-dark text-light" type="text"
+               placeholder="Ne düşünüyorsun?">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-primary" (click)="answerTheQuestion(question.id)">Cevapla</button>
+        </div>
+      </div>
+    </form>
+    <div [ngClass]="result.process ? 'alert alert-success':'alert alert-danger'" *ngIf="result.message.length>0">
+      {{result.message}}
+    </div>
+  </div>
+</div>
